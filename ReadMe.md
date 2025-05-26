@@ -47,7 +47,6 @@ GestionEvents/
 │    │    │    │    ├── NotificationFactory.java
 │    │    │    ├── Main.java
 │    │    ├── resources/
-│    │    │    ├── style.css
 │    │    │    ├── evenements.json
 │    │    │    ├── participants.json
 │    ├── test/
