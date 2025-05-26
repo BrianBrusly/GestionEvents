@@ -1,30 +1,40 @@
 package models;
 
-public class Intervenant {
-    private final String id;
-    private final String nom;
-    private final String specialite;
+public class Intervenant extends Participant {
+    private String specialite;
+    private String biographie;
 
-    public Intervenant(String id, String nom, String specialite) {
-        this.id = id;
-        this.nom = nom;
+    // Constructeurs
+    public Intervenant() {
+        super();
+    }
+
+    public Intervenant(String id, String nom, String email, String specialite, String biographie) {
+        super(id, nom, email);  // Initialise les champs de Participant
         this.specialite = specialite;
+        this.biographie = biographie;
     }
 
-    public String getId() {
-        return id;
+    // Méthodes spécifiques
+    public String presenter() {
+        return String.format("%s - Spécialité : %s \n Bio : %s",
+                getNom(), specialite, biographie);
     }
 
-    public String getNom() {
-        return nom;
-    }
-
+    // Getters/Setters
     public String getSpecialite() {
         return specialite;
     }
 
-    @Override
-    public String toString() {
-        return "Intervenant{id='" + id + "', nom='" + nom + "', specialite='" + specialite + "'}";
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public String getBiographie() {
+        return biographie;
+    }
+
+    public void setBiographie(String biographie) {
+        this.biographie = biographie;
     }
 }

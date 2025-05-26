@@ -1,20 +1,21 @@
 # GestionEvents
 
-## 📌 Description
+##  Description
 Ce projet permet de gérer différents types d'événements (**conférences, concerts**), avec :
 - **Inscription des participants**
 - **Gestion des organisateurs**
 - **Notifications en temps réel (Observer)**
-- **Persistance des données (JSON/XML)**
+- **Persistance des données (JSON)**
 
-## 📂 Structure du projet
+##  Structure du projet
 - `Evenement.java` : Classe abstraite des événements
 - `Conference.java`, `Concert.java` : Sous-classes spécialisées
 - `GestionEvenements.java` : **Singleton**
-- `NotificationService.java` : **Interface pour l’envoi de notifications**
+- `NotificationService.java` : **Interface pour l'envoi de notifications**
 - `EvenementObservable.java` et `ParticipantObserver.java` : **Observer Pattern**
-- `CapaciteMaxAtteinteException.java` et `EvenementDejaExistantException.java` : **Exceptions personnalisées**
+- `CapaciteMaxAtteinteException.java` , `EvenementDejaExistantException.java` ...etc : **Exceptions personnalisées**
 
+```
 GestionEvents/
 ├── src/
 │    ├── main/
@@ -26,64 +27,101 @@ GestionEvents/
 │    │    │    │    ├── Participant.java
 │    │    │    │    ├── Organisateur.java
 │    │    │    │    ├── Intervenant.java
+│    │    │    ├── service/
 │    │    │    │    ├── NotificationService.java
+│    │    │    │    ├── EmailNotificationService.java
+│    │    │    │    ├── SMSNotificationService.java
+│    │    │    ├── gestion/
 │    │    │    │    ├── GestionEvenements.java
+│    │    │    ├── persistence/
+│    │    │    │    ├── GestionPersistance.java
+│    │    │    ├── observer/
+│    │    │    │    ├── EvenementObservable.java
+│    │    │    │    ├── ParticipantObserver.java
+│    │    │    ├── exceptions/
+│    │    │    │    ├── CapaciteMaxAtteinteException.java
+│    │    │    │    ├── EvenementDejaExistantException.java
+│    │    │    │    ├── EvenementNonTrouveException.java
+│    │    │    │    ├── ParticipantDejaInscritException.java
+│    │    │    ├── factory/
+│    │    │    │    ├── NotificationFactory.java
+│    │    │    ├── Main.java
 │    │    ├── resources/
-│    │    │    ├── Fichiers(.json)
-│    │    ├── observer/
-│    │    │    ├── EvenementObservable.java
-│    │    │    ├── ParticipantObserver.java
+│    │    │    ├── style.css
+│    │    │    ├── evenements.json
+│    │    │    ├── participants.json
 │    ├── test/
 │    │    ├── java/
 │    │    │    ├── tests/
-│    ├── docs/
-│    │    ├── UML/
-│    │    ├── Rapport.pdf
-├── pom.xml (Si tu utilises Maven)
-├── README.md (Explication du projet)
-├── .gitignore (Liste des fichiers à ignorer)
+│    │    │    │    ├── GestionEvenementsTest.java
+│    │    │    │    ├── EvenementTest.java
+│    │    │    │    ├── GestionPersistanceTest.java
+├── pom.xml
+├── README.md
+├── .gitignore
+```
 
+##  Technologies utilisées
 
----
-
-## ⚙️ Technologies utilisées
-
-- Java 21+
+- Java 14+
+- JavaFX pour l'interface graphique
+- Jackson pour la sérialisation/désérialisation JSON
+- JUnit 5 pour les tests unitaires
+- Maven pour la gestion des dépendances et du build
 - Programmation orientée objet (POO)
-- Git & GitHub
 
----
+##  Design Patterns implémentés
 
-## 🚀 Fonctionnalités prévues
+- **Singleton** : Pour la classe GestionEvenements
+- **Observer** : Pour la notification des participants
+- **Factory** : Pour la création des services de notification
+- **Strategy** : Pour les différents types de notification (Email, SMS)
 
-- [x] Modèle `Evenement` de base
-- [x] Ajout des participants et organisateurs
-- [ ] Gestion des notifications
-- [ ] Interface utilisateur (console ou graphique)
-- [ ] Sauvegarde et chargement des événements (JSON, fichier, base de données)
+##  Fonctionnalités
 
----
+-  Modèle `Evenement` avec sous-types Concert et Conference
+-  Gestion des participants et organisateurs
+-  Système de notification en temps réel (Observer Pattern)
+-  Persistance des données en JSON
+-  Interface utilisateur JavaFX
+-  Tests unitaires avec JUnit 5
 
-## 📁 À venir
+##  Tests
 
-- Tests unitaires
-- Système d'inscription aux événements
-- Support multilingue
-
----
-
-## 👨‍💻 Auteur
-
-> Développé par [BrianBrusly](https://github.com/BrianBrusly)
-
----
-
-## 📜 Licence
-
-Ce projet est sous licence libre (à préciser, ex : MIT, GPL...).
-
+Des tests unitaires complets sont inclus pour valider:
+- La logique métier de GestionEvenements
+- Les opérations sur les événements
+- La persistance des données
 
 ## 🛠️ Installation
-1️⃣ Clonez le projet :
+
+1. Clonez le projet :
    ```sh
    git clone https://github.com/BrianBrusly/GestionEvents.git
+   ```
+
+2. Importez le projet dans IntelliJ IDEA:
+    - File > Open... > Sélectionnez le dossier du projet
+    - IntelliJ devrait détecter automatiquement le fichier pom.xml
+
+3. Construisez le projet avec Maven:
+   ```sh
+   mvn clean install
+   ```
+
+4. Exécutez l'application:
+   ```sh
+   mvn javafx:run
+   ```
+
+##  Principes SOLID appliqués
+
+1. **Single Responsibility Principle (SRP)** : Chaque classe a une responsabilité unique.
+2. **Open/Closed Principle (OCP)** : Les classes sont ouvertes à l'extension mais fermées à la modification.
+3. **Liskov Substitution Principle (LSP)** : Les sous-classes (Concert, Conference) peuvent remplacer la classe de base (Evenement).
+4. **Interface Segregation Principle (ISP)** : Des interfaces spécifiques (EvenementObservable, ParticipantObserver) sont utilisées.
+5. **Dependency Inversion Principle (DIP)** : La dépendance vers les abstractions plutôt que les implémentations concrètes.
+
+##  Auteur
+
+> Développé par [BrianBrusly](https://github.com/BrianBrusly)
