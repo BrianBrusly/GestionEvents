@@ -110,7 +110,8 @@ Des tests unitaires complets sont inclus pour valider:
 
 4. Exécutez l'application:
    ```sh
-   mvn javafx:run
+   mvn test
+   mvn test jacoco:report
    ```
 
 ##  Principes SOLID appliqués
