@@ -433,7 +433,7 @@ Des tests unitaires complets sont inclus pour valider:
 
 ### Persistance JSON
 
-**Choix de JSON plutôt que base de données :**
+**Choix de JSON plutôt que base de données/XML:**
 - Plus simple à mettre en place
 - Fichiers lisibles et modifiables
 - Suffisant pour un projet éducatif
